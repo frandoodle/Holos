@@ -6586,6 +6586,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to in ac^-1.
+        /// </summary>
+        public static string InchesPerAcre {
+            get {
+                return ResourceManager.GetString("InchesPerAcre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to in. year^-1.
         /// </summary>
         public static string InchesPerYear {
@@ -8805,6 +8814,15 @@ namespace H.Core.Properties {
         public static string LabelFertilityRate {
             get {
                 return ResourceManager.GetString("LabelFertilityRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Additive.
+        /// </summary>
+        public static string LabelFertilizerAdditive {
+            get {
+                return ResourceManager.GetString("LabelFertilizerAdditive", resourceCulture);
             }
         }
         
@@ -11626,6 +11644,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To calculate enteric methane emissions for calves who are not being milk-fed, custom values need to be specified for NEga and NEma..
+        /// </summary>
+        public static string MessageProvideCustomNeValuesForBeefCalvesDietIngredient {
+            get {
+                return ResourceManager.GetString("MessageProvideCustomNeValuesForBeefCalvesDietIngredient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Removing undersown status for the crop grown in {0}.
         /// </summary>
         public static string MessageRemovingUndersownStatus {
@@ -11667,6 +11694,15 @@ namespace H.Core.Properties {
         public static string MessageShelterbeltComponentNotAvailable {
             get {
                 return ResourceManager.GetString("MessageShelterbeltComponentNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soil reduction factors are preliminary and may be updated in a future release.
+        /// </summary>
+        public static string MessageSoilReductionFactorsExperimental {
+            get {
+                return ResourceManager.GetString("MessageSoilReductionFactorsExperimental", resourceCulture);
             }
         }
         
@@ -11811,6 +11847,15 @@ namespace H.Core.Properties {
         public static string Millimeters {
             get {
                 return ResourceManager.GetString("Millimeters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mm ha^-1.
+        /// </summary>
+        public static string MillimetersPerHectare {
+            get {
+                return ResourceManager.GetString("MillimetersPerHectare", resourceCulture);
             }
         }
         
