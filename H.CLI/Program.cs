@@ -51,9 +51,9 @@ namespace H.CLI
             double moistureResponseFunctionAtWiltingPoint = 0.180;
             double moistureResponseFunctionAtSaturation = 0.420;
             
-            List<double> PET = getReCalculationData("D:\\aafc\\reinput_pet.csv");
-            List<double> PREC = getReCalculationData("D:\\aafc\\reinput_prec.csv");
-            List<double> TAVG = getReCalculationData("D:\\aafc\\reinput_tavg.csv");
+            List<double> PET = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_pet.csv");
+            List<double> PREC = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_prec.csv");
+            List<double> TAVG = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_tavg.csv");
 
             Console.Write("\n");
             Console.Write("emergenceDay: ");
@@ -121,7 +121,7 @@ namespace H.CLI
             temperatures: TAVG
                 );
 
-            Console.WriteLine("Thing:");
+            Console.WriteLine("re:");
 
             foreach (double value in baaba)
             {
