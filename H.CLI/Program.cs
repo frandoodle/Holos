@@ -40,8 +40,8 @@ namespace H.CLI
             int emergenceDay = 141;
             int ripeningDay = 197;
             double yield = 3000;
-            double clay = 5;
-            double sand = 20;
+            double clay = 0.05;
+            double sand = 0.20;
             double layerThicknessInMillimeters = 250;
             double percentageSoilOrganicCarbon = 2;
             double variance = 300;
