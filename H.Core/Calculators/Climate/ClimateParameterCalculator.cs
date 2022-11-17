@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -12,8 +13,31 @@ using H.Core.Providers.Climate;
 
 namespace H.Core.Calculators.Climate
 {
+
+
     public class ClimateParameterCalculator : IClimateParameterCalculator
     {
+        public static void createFile()
+        {
+            var filepath = "your_path.csv";
+            using (StreamWriter writer = new StreamWriter(new FileStream(filepath,
+            FileMode.Create, FileAccess.Write)))
+            {
+            }
+        }
+
+        public static void writeToFile(string entry, string sep = ",")
+        {
+            var filepath = "your_path.csv";
+            using (StreamWriter writer = new StreamWriter(new FileStream(filepath,
+            FileMode.Append, FileAccess.Write)))
+            {
+                //Add a column
+                writer.Write(entry);
+                writer.Write(sep);
+            }
+        }
+
         #region Fields
 
         private readonly Table_1_Growing_Degree_Crop_Coefficients_Provider _growingDegreeCropCoefficientsProvider;
