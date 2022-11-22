@@ -39,29 +39,26 @@ namespace H.CLI
             return (myList);
         }
 
-        public static void createFile()
+        public static void createFile(string filepath)
         {
-            var filepath = "your_path.csv";
             using (StreamWriter writer = new StreamWriter(new FileStream(filepath,
             FileMode.Create, FileAccess.Write)))
             {
             }
         }
 
-        public static void writeToFile(string entry, string sep = ",")
+        public static void writeToFile(string entry, string filepath)
         {
-            var filepath = "your_path.csv";
             using (StreamWriter writer = new StreamWriter(new FileStream(filepath,
             FileMode.Append, FileAccess.Write)))
             {
                 //Add a column
-                writer.Write(entry);
-                writer.Write(sep);
+                writer.WriteLine(entry);
             }
         }
         static void Main(string[] args)
         {
-            createFile();
+            
 
             int emergenceDay = 141;
             int ripeningDay = 197;
@@ -77,62 +74,8 @@ namespace H.CLI
             double moistureResponseFunctionAtWiltingPoint = 0.180;
             double moistureResponseFunctionAtSaturation = 0.420;
             
-            List<double> PET = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_pet.csv");
-            List<double> PREC = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_prec.csv");
-            List<double> TAVG = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_tavg.csv");
+            
 
-            //Console.Write("\n");
-            //Console.Write("emergenceDay: ");
-            //Console.WriteLine(emergenceDay);
-            //Console.Write("ripeningDay: ");
-            //Console.WriteLine(ripeningDay);
-            //Console.Write("yield: ");
-            //Console.WriteLine(yield);
-            //Console.Write("clay: ");
-            //Console.WriteLine(clay);
-            //Console.Write("sand: ");
-            //Console.WriteLine(sand);
-            //Console.Write("layerThicknessInMillimeters: ");
-            //Console.WriteLine(layerThicknessInMillimeters);
-            //Console.Write("percentageSoilOrganicCarbon: ");
-            //Console.WriteLine(percentageSoilOrganicCarbon);
-            //Console.Write("variance: ");
-            //Console.WriteLine(variance);
-            //Console.Write("alfa: ");
-            //Console.WriteLine(alfa);
-            //Console.Write("decompositionMinimumTemperature: ");
-            //Console.WriteLine(decompositionMinimumTemperature);
-            //Console.Write("decompositionMaximumTemperature: ");
-            //Console.WriteLine(decompositionMaximumTemperature);
-            //Console.Write("moistureResponseFunctionAtWiltingPoint: ");
-            //Console.WriteLine(moistureResponseFunctionAtWiltingPoint);
-            //Console.Write("moistureResponseFunctionAtSaturation: ");
-            //Console.WriteLine(moistureResponseFunctionAtSaturation);
-            //Console.Write("\n");
-
-            //Console.WriteLine("PET:");
-            //foreach (double value in PET)
-            //{
-            //    Console.WriteLine(value.ToString());
-            //}
-            //Console.WriteLine("PREC:");
-            //foreach (double value in PREC)
-            //{
-            //    Console.WriteLine(value.ToString());
-            //}
-            //Console.WriteLine("TAVG:");
-            //foreach (double value in TAVG)
-            //{
-            //    Console.WriteLine(value.ToString());
-            //}
-
-            // Get NASA climate data
-
-            // Write NASA data to file
-
-            // Calculate climate parameter
-
-            // Write climate parameter things to file
 
             ClimateParameterCalculator cpc = new ClimateParameterCalculator();
             NasaClimateProvider ncp = new NasaClimateProvider();
@@ -141,36 +84,30 @@ namespace H.CLI
             double longitude = 45;
             List<DailyClimateData> NASAClimateData = new List<DailyClimateData>();
             NASAClimateData = ncp.GetCustomClimateData(latitude, longitude);
-            writeToFile("Year, ");
-            foreach (DailyClimateData day in NASAClimateData) {writeToFile(day.Year.ToString());}
-            writeToFile("\n", sep:"");
-            writeToFile("JulianDay, "); 
-            foreach (DailyClimateData day in NASAClimateData) { writeToFile(day.JulianDay.ToString()); }
-            writeToFile("\n", sep : "");
-            writeToFile("MeanDailyAirTemperature, ");
-            foreach (DailyClimateData day in NASAClimateData) { writeToFile(day.MeanDailyAirTemperature.ToString()); }
-            writeToFile("\n", sep : "");
-            writeToFile("MeanDailyPrecipitation, ");
-            foreach (DailyClimateData day in NASAClimateData) { writeToFile(day.MeanDailyPrecipitation.ToString()); }
-            writeToFile("\n", sep : "");
-            writeToFile("MeanDailyPET, ");
-            foreach (DailyClimateData day in NASAClimateData) { writeToFile(day.MeanDailyPET.ToString()); }
-            writeToFile("\n", sep : "");
-            writeToFile("RelativeHumidity, ");
-            foreach (DailyClimateData day in NASAClimateData) { writeToFile(day.RelativeHumidity.ToString()); }
-            writeToFile("\n", sep : "");
-            writeToFile("SolarRadiation, ");
-            foreach (DailyClimateData day in NASAClimateData) { writeToFile(day.SolarRadiation.ToString()); }
-            writeToFile("\n", sep : "");
-            writeToFile("Date, ");
-            foreach (DailyClimateData day in NASAClimateData) { writeToFile(day.Date.ToString()); }
-            writeToFile("\n", sep: "");
 
-            PET = 
-            PREC = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_prec.csv");
-            TAVG = getReCalculationData("D:\\aafc\\Holos\\re\\reinput_tavg.csv");
+            createFile("holos_nasa_climate.csv");
 
-            List<ClimateParameterDailyResult> tattt = cpc.CalculateDailyClimateParameterResults(
+            writeToFile("Year, JulianDay, MeanDailyAirTemperature, MeanDailyPrecipitation, MeanDailyPET", "holos_nasa_climate.csv");
+            foreach (n n DailyClimateData day in NASAClimateData) {
+                writeToFile(day.ToCustomFileFormatString(), "holos_nasa_climate.csv");
+            }
+
+            
+            List<double> PET = NASAClimateData
+                .Where(i => i.Year == 2000)
+                .Select(i => i.MeanDailyPET).ToList();
+            List<double> PREC = NASAClimateData
+               .Where(i => i.Year == 2000)
+               .Select(i => i.MeanDailyPrecipitation).ToList();
+            List<double> TAVG = NASAClimateData
+               .Where(i => i.Year == 2000)
+               .Select(i => i.MeanDailyAirTemperature).ToList();
+
+            //List<double> PET = NASAClimateData.Select(i => i.MeanDailyPET).ToList();
+            //List<double> PREC = NASAClimateData.Select(i => i.MeanDailyPrecipitation).ToList();
+            //List<double> TAVG = NASAClimateData.Select(i => i.MeanDailyAirTemperature).ToList();
+
+            List<ClimateParameterDailyResult> re_results = cpc.CalculateDailyClimateParameterResults(
                 emergenceDay: emergenceDay,
              ripeningDay: ripeningDay,
              yield: yield,
@@ -188,31 +125,14 @@ namespace H.CLI
             precipitations: PREC,
             temperatures: TAVG
                 );
-            writeToFile("JulianDay_ClimateParameter, ");
-            foreach (ClimateParameterDailyResult day in tattt) { writeToFile(day.JulianDay.ToString()); }
-            writeToFile("\n", sep: "");
-            writeToFile("GreenAreaIndex, ");
-            foreach (ClimateParameterDailyResult day in tattt) { writeToFile(day.GreenAreaIndex.ToString()); }
-            writeToFile("\n", sep: "");
 
-            List<double> baaba = cpc.CalculateDailyClimateParameters(
-                emergenceDay: emergenceDay,
-             ripeningDay: ripeningDay,
-             yield: yield,
-             clay: clay,
-             sand: sand,
-             layerThicknessInMillimeters: layerThicknessInMillimeters,
-             percentageSoilOrganicCarbon: percentageSoilOrganicCarbon,
-             variance: variance,
-             alfa: alfa,
-             decompositionMinimumTemperature: decompositionMinimumTemperature,
-             decompositionMaximumTemperature: decompositionMaximumTemperature,
-             moistureResponseFunctionAtWiltingPoint: moistureResponseFunctionAtWiltingPoint,
-             moistureResponseFunctionAtSaturation: moistureResponseFunctionAtSaturation,
-             evapotranspirations: PET,
-            precipitations: PREC,
-            temperatures: TAVG
-                );
+            createFile("holos_re_calculation.csv");
+
+            writeToFile("JulianDay, ClimateParameter, InputTemperature,InputPrecipitation,InputEvapotranspiration,GreenAreaIndex, SurfaceTemperature, SoilTemperature, CropCoefficient, CropInterception, VolumetricSoilWaterContent, ActualEvapotranspiration, DeepPercolation, ReferenceEvapotranspiration, SoilAvailableWater, WaterStorage, ClimateParamterTemperature, ClimateParameterWater, FieldCapacity, WiltingPoint", "holos_re_calculation.csv");
+            foreach (ClimateParameterDailyResult day in re_results)
+            {
+                writeToFile(day.ToCustomFileFormatString(), "holos_re_calculation.csv");
+            }
 
             Console.WriteLine("done");
             Console.ReadKey();

@@ -38,5 +38,10 @@ namespace H.Core.Calculators.Climate
         {
             return $"{nameof(ClimateParameter)}: {this.ClimateParameter}";
         }
+
+        public string ToCustomFileFormatString()
+        {
+            return $"{JulianDay},{ClimateParameter},{InputTemperature},{InputPrecipitation},{InputEvapotranspiration}, {GreenAreaIndex},{SurfaceTemperature},{SoilTemperature}, {CropCoefficient}, {CropInterception}, {VolumetricSoilWaterContent}, {ActualEvapotranspiration}, {DeepPercolation}, {ReferenceEvapotranspiration}, {SoilAvailableWater}, {WaterStorage}, {ClimateParamterTemperature}, {ClimateParameterWater}, {FieldCapacity}, {WiltingPoint}";
+        }
     }
 }
