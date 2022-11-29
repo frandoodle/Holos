@@ -88,7 +88,7 @@ namespace H.CLI
             createFile("holos_nasa_climate.csv");
 
             writeToFile("Year, JulianDay, MeanDailyAirTemperature, MeanDailyPrecipitation, MeanDailyPET", "holos_nasa_climate.csv");
-            foreach (n n DailyClimateData day in NASAClimateData) {
+            foreach (DailyClimateData day in NASAClimateData) {
                 writeToFile(day.ToCustomFileFormatString(), "holos_nasa_climate.csv");
             }
 
