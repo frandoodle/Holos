@@ -58,15 +58,17 @@ namespace H.CLI
         }
         static void Main(string[] args)
         {
-            
+            double yield = 2181.304348;
+            double clay = 0.39;
+            double sand = 0.17;
+            double percentageSoilOrganicCarbon = 2;
+
 
             int emergenceDay = 141;
             int ripeningDay = 197;
-            double yield = 3000;
-            double clay = 0.05;
-            double sand = 0.20;
+            
+            
             double layerThicknessInMillimeters = 250;
-            double percentageSoilOrganicCarbon = 2;
             double variance = 300;
             double alfa = 0.7;
             double decompositionMinimumTemperature = -3.78;
@@ -79,9 +81,9 @@ namespace H.CLI
 
             ClimateParameterCalculator cpc = new ClimateParameterCalculator();
             NasaClimateProvider ncp = new NasaClimateProvider();
-
-            double latitude = 45;
-            double longitude = 45;
+             
+            double latitude = 53.416667;
+            double longitude = -113.55;
             List<DailyClimateData> NASAClimateData = new List<DailyClimateData>();
             NASAClimateData = ncp.GetCustomClimateData(latitude, longitude);
 
@@ -92,20 +94,37 @@ namespace H.CLI
                 writeToFile(day.ToCustomFileFormatString(), "holos_nasa_climate.csv");
             }
 
-            
+            int theyear = 1983;
+
+
             List<double> PET = NASAClimateData
-                .Where(i => i.Year == 2000)
+                .Where(i => i.Year == theyear)
                 .Select(i => i.MeanDailyPET).ToList();
             List<double> PREC = NASAClimateData
-               .Where(i => i.Year == 2000)
+               .Where(i => i.Year == theyear)
                .Select(i => i.MeanDailyPrecipitation).ToList();
             List<double> TAVG = NASAClimateData
-               .Where(i => i.Year == 2000)
+               .Where(i => i.Year == theyear)
                .Select(i => i.MeanDailyAirTemperature).ToList();
 
             //List<double> PET = NASAClimateData.Select(i => i.MeanDailyPET).ToList();
             //List<double> PREC = NASAClimateData.Select(i => i.MeanDailyPrecipitation).ToList();
             //List<double> TAVG = NASAClimateData.Select(i => i.MeanDailyAirTemperature).ToList();
+
+            ////Get site yield and iterate through that to calculate re
+
+            //var filePath = @"D:\aafc\Holos\H.CLI\bin\Debug\yield.csv";
+            //var contents = File.ReadAllLines(filePath);
+
+            //var csv = (from line in contents
+            //           select line.Split(',')).SelectMany(x1 => x1);
+            //List<double> yields = csv.Select(x => double.Parse(x)).ToList();
+
+            //foreach (var i in yields)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            
 
             List<ClimateParameterDailyResult> re_results = cpc.CalculateDailyClimateParameterResults(
                 emergenceDay: emergenceDay,
